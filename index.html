@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/538a48f33d.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
+    <title>Les petits plats</title>
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Logo du site Les petits plats">
+    </header>
+    <main>
+        <section id="researchZone">
+            <div id="researchBar">
+                <input type="text" id="researchBarInput">
+                <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div>
+                <ul id="tagsList"></ul>
+            </div>
+            <div id="filterZone">
+                <div class="filterButtons" id="ingredients_button">
+                    <input type="text" class="filters" id="filter_ingredients" placeholder="Ingrédients">
+                    <i class="fas fa-chevron-up" id="ingredientsUp"></i>
+                    <i class="fas fa-chevron-down" id="ingredientsDown"></i>
+                    <ul class="filtersList" id="ingredientsList"></ul>
+                </div>
+                <div class="filterButtons" id="appliances_button">
+                    <input type="text" class="filters" id="filter_appliances" placeholder="Appareils">
+                    <i class="fas fa-chevron-up" id="appliancesUp"></i>
+                    <i class="fas fa-chevron-down" id="appliancesDown"></i>
+                    <ul class="filtersList" id="appliancesList"></ul>
+                </div>
+                <div class="filterButtons" id="ustensils_button">
+                    <input type="text" class="filters" id="filter_ustensils" placeholder="Ustensiles">
+                    <i class="fas fa-chevron-up" id="ustensilsUp"></i>
+                    <i class="fas fa-chevron-down" id="ustensilsDown"></i>
+                    <ul class="filtersList" id="ustensilsList"></ul>
+                </div>                
+            </div>
+
+        </section>
+
+        <section id="recipesSection">
+
+        </section>
+    </main>
+    <script type="module" src="./scripts/pages/index.js"></script>
+    
+</body>
+</html>
