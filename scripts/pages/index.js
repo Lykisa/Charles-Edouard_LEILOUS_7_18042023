@@ -4,18 +4,20 @@ import applianceFactory from '../factories/appliance.js';
 import ustensilsFactory from '../factories/ustensils.js';
 const json = '../data/recipes.json';
 window.localStorage.setItem('ingredients', JSON.stringify([]));
+window.localStorage.setItem('appliances', JSON.stringify([]));
+window.localStorage.setItem('ustensils', JSON.stringify([]));
 
 async function getRecipes () {
   const recipes = await fetch(json)
     .then((resp) => resp.json())
     .then((json) => json.recipes);
-  console.log(recipes);
 
   return ({ recipes });
 }
 
 async function displayData (recipes) {
   const recipesSection = document.getElementById('recipesSection');
+  recipesSection.innerHTML = '';
 
   recipes.forEach((recipe) => {
     const recipeModel = recipeFactory(recipe);
@@ -28,11 +30,7 @@ async function displayData (recipes) {
     recipeCardDOM.appendChild(recipeAppliancesCardDOM);
     recipeCardDOM.appendChild(recipeUstensilsCardDOM);
   });
-}
 
-async function init () {
-  const { recipes } = await getRecipes();
-  displayData(recipes);
   const ingredientModel = ingredientFactory();
   const applianceModel = applianceFactory();
   const ustensilModel = ustensilsFactory();
@@ -43,8 +41,58 @@ async function init () {
   const ingredientsElement = document.querySelectorAll('.ingredientsLi');
   ingredientsElement.forEach((element) => {
     /* fonction crée dans la factory */
-    element.addEventListener('click', ingredientModel.addTagIngredient(element.innerHTML));
+    element.addEventListener('click', (e) => {
+      ingredientModel.addTagIngredient(element.innerHTML);
+      /* fonction de la recherche appelée */
+      launchSearch();
+    });
   });
+  const appliancesElement = document.querySelectorAll('.appliancesLi');
+  appliancesElement.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      applianceModel.addTagAppliance(element.innerHTML);
+      launchSearch();
+    });
+  });
+  const ustensilsElement = document.querySelectorAll('.ustensilsLi');
+  ustensilsElement.forEach((element) => {
+    element.addEventListener('click', (e) => {
+      ustensilModel.addTagUstensil(element.innerHTML);
+      launchSearch();
+    });
+  });
+}
+
+async function launchSearch () {
+  const localStorageIngredient = JSON.parse(window.localStorage.getItem('ingredients'));
+  const localStorageAppliance = JSON.parse(window.localStorage.getItem('appliances'));
+  const localStorageUstensil = JSON.parse(window.localStorage.getItem('ustensils'));
+  const { recipes } = await getRecipes();
+  const result = [];
+
+  recipes.forEach((element) => {
+    const ingredientsRecipe = element.ingredients;
+    const ingredients = [];
+    ingredientsRecipe.forEach(ing => {
+      ingredients.push(ing.ingredient);
+    });
+
+    const ustensilsRecipe = element.ustensils;
+
+    const applianceRecipe = [element.appliance];
+
+    if (localStorageIngredient.every(i => ingredients.includes(i)) &&
+        localStorageUstensil.every(u => ustensilsRecipe.includes(u)) &&
+        localStorageAppliance.every(a => applianceRecipe.includes(a))) {
+      result.push(element);
+    }
+  });
+  displayData(result);
+}
+
+async function init () {
+  const { recipes } = await getRecipes();
+  displayData(recipes);
 }
 
 init();
@@ -52,7 +100,6 @@ init();
 function getResearchBarInput () {
   const input = document.getElementById('researchBarInput');
   let inputValue = '';
-  console.log(inputValue);
   input.addEventListener('change', () => {
     inputValue = input.value;
     console.log(inputValue);
@@ -73,7 +120,7 @@ const ingredientsDown = document.getElementById('ingredientsDown');
 const ingredientsList = document.getElementById('ingredientsList');
 
 function displayIngredients () {
-  ingredientsButton.style.width = '700px';
+  ingredientsButton.style.width = '696px';
   ingredientsList.style.display = 'grid';
   ingredientsDown.style.display = 'none';
   ingredientsUp.style.display = 'block';
@@ -87,6 +134,7 @@ function displayIngredientsRegular () {
 }
 
 ingredientsFilter.addEventListener('click', displayIngredients);
+ingredientsDown.addEventListener('click', displayIngredients);
 ingredientsUp.addEventListener('click', displayIngredientsRegular);
 
 /* Appliances */
@@ -112,6 +160,7 @@ function displayAppliancesRegular () {
 }
 
 appliancesFilter.addEventListener('click', displayAppliances);
+appliancesDown.addEventListener('click', displayAppliances);
 appliancesUp.addEventListener('click', displayAppliancesRegular);
 
 /* Ustensils */
@@ -137,4 +186,5 @@ function displayUstensilsRegular () {
 }
 
 ustensilsFilter.addEventListener('click', displayUstensils);
+ustensilsDown.addEventListener('click', displayUstensils);
 ustensilsUp.addEventListener('click', displayUstensilsRegular);
