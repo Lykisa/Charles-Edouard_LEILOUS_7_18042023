@@ -75,6 +75,45 @@ main {
     background-color: #ED6454;
 }
 
+/* TAGS */
+
+#tagsList {
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+
+#tagsList li {
+    list-style: none;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.ingredient {
+    background-color: #3282F7;
+}
+
+.appliance {
+    background-color: #68D9A4;
+}
+
+.ustensil {
+    background-color: #ED6454;
+}
+
+#tagsList i {
+    margin-left: 20px;
+    font-size: 15px;
+    color: white;
+    cursor: pointer;
+}
+
 /* FILTERS */
 
 #filterZone{

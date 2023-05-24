@@ -16,6 +16,7 @@ export default function applianceFactory () {
     });
     const list = document.getElementById('appliancesList');
     list.innerHTML = '';
+    appliances.sort();
     appliances.forEach((appliance) => {
       const applianceList = document.createElement('li');
       applianceList.className = 'appliancesLi';

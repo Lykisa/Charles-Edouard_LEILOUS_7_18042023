@@ -16,6 +16,7 @@ export default function ustensilsFactory () {
     });
     const list = document.getElementById('ustensilsList');
     list.innerHTML = '';
+    ustensils.sort();
     ustensils.forEach((ustensils) => {
       const ustensilsList = document.createElement('li');
       ustensilsList.className = 'ustensilsLi';

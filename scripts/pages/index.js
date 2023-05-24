@@ -44,6 +44,7 @@ async function displayData (recipes) {
     element.addEventListener('click', (e) => {
       ingredientModel.addTagIngredient(element.innerHTML);
       /* fonction de la recherche appelée */
+      renderTags();
       launchSearch();
     });
   });
@@ -51,6 +52,7 @@ async function displayData (recipes) {
   appliancesElement.forEach((element) => {
     element.addEventListener('click', (e) => {
       applianceModel.addTagAppliance(element.innerHTML);
+      renderTags();
       launchSearch();
     });
   });
@@ -58,6 +60,7 @@ async function displayData (recipes) {
   ustensilsElement.forEach((element) => {
     element.addEventListener('click', (e) => {
       ustensilModel.addTagUstensil(element.innerHTML);
+      renderTags();
       launchSearch();
     });
   });
@@ -188,3 +191,90 @@ function displayUstensilsRegular () {
 ustensilsFilter.addEventListener('click', displayUstensils);
 ustensilsDown.addEventListener('click', displayUstensils);
 ustensilsUp.addEventListener('click', displayUstensilsRegular);
+
+/* Fonction affichage des tags */
+
+function closeTag (type, valeur) {
+  const localStorageIngredient = JSON.parse(window.localStorage.getItem('ingredients'));
+  const localStorageAppliance = JSON.parse(window.localStorage.getItem('appliances'));
+  const localStorageUstensil = JSON.parse(window.localStorage.getItem('ustensils'));
+  switch (type) {
+    case 'ing': {
+      const index = localStorageIngredient.indexOf(valeur);
+      localStorageIngredient.splice(index, 1);
+      window.localStorage.setItem('ingredients', JSON.stringify(localStorageIngredient));
+      renderTags();
+      break;
+    }
+    case 'app' : {
+      const index = localStorageAppliance.indexOf(valeur);
+      localStorageAppliance.splice(index, 1);
+      window.localStorage.setItem('appliances', JSON.stringify(localStorageAppliance));
+      renderTags();
+      break;
+    }
+    case 'ust' : {
+      const index = localStorageUstensil.indexOf(valeur);
+      localStorageUstensil.splice(index, 1);
+      window.localStorage.setItem('ustensils', JSON.stringify(localStorageUstensil));
+      renderTags();
+      break;
+    }
+
+    default:
+      break;
+  }
+  launchSearch();
+}
+function renderTags () {
+  const localStorageIngredient = JSON.parse(window.localStorage.getItem('ingredients'));
+  const localStorageAppliance = JSON.parse(window.localStorage.getItem('appliances'));
+  const localStorageUstensil = JSON.parse(window.localStorage.getItem('ustensils'));
+  const ul = document.getElementById('tagsList');
+  ul.innerHTML = '';
+  localStorageIngredient.forEach((ing) => {
+    const li = document.createElement('li');
+    li.classList.add('ingredient');
+    const span = document.createElement('span');
+    span.textContent = ing;
+    const i = document.createElement('i');
+    i.className = 'fa-solid fa-xmark';
+    i.addEventListener('click', () => {
+      closeTag('ing', ing);
+    });
+
+    ul.appendChild(li);
+    li.appendChild(span);
+    li.appendChild(i);
+  });
+  localStorageAppliance.forEach((app) => {
+    const li = document.createElement('li');
+    li.classList.add('appliance');
+    const span = document.createElement('span');
+    span.textContent = app;
+    const i = document.createElement('i');
+    i.className = 'fa-solid fa-xmark';
+    i.addEventListener('click', () => {
+      closeTag('app', app);
+    });
+
+    ul.appendChild(li);
+    li.appendChild(span);
+    li.appendChild(i);
+  });
+  localStorageUstensil.forEach((ust) => {
+    const li = document.createElement('li');
+    li.classList.add('ustensil');
+    const span = document.createElement('span');
+    span.textContent = ust;
+    const i = document.createElement('i');
+    i.className = 'fa-solid fa-xmark';
+    i.addEventListener('click', () => {
+      closeTag('ust', ust);
+    });
+
+    ul.appendChild(li);
+    li.appendChild(span);
+    li.appendChild(i);
+  });
+}

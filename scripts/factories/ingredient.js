@@ -16,6 +16,7 @@ export default function ingredientFactory () {
     });
     const list = document.getElementById('ingredientsList');
     list.innerHTML = '';
+    ingredients.sort();
     ingredients.forEach((ingredient) => {
       const ingredientList = document.createElement('li');
       ingredientList.className = 'ingredientsLi';
