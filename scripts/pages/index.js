@@ -66,6 +66,8 @@ async function displayData (recipes) {
   });
 }
 
+/* Fonction de recherche */
+
 async function launchSearch () {
   const localStorageIngredient = JSON.parse(window.localStorage.getItem('ingredients'));
   const localStorageAppliance = JSON.parse(window.localStorage.getItem('appliances'));
@@ -100,10 +102,75 @@ async function init () {
 
 init();
 
+/* Fonction pour les barres de recherches */
+
+/* Ingrédients */
+
+function getIngredientsFilterResearchInput () {
+  const input = document.getElementById('filter_ingredients');
+  let inputValue = '';
+  input.addEventListener('keyup', () => {
+    inputValue = input.value;
+    console.log(inputValue);
+    const items = document.querySelectorAll('.ingredientsLi');
+    items.forEach(item => {
+      if (item.innerHTML.toLowerCase().includes(inputValue.toLowerCase())) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+}
+
+getIngredientsFilterResearchInput();
+
+/* Appliances */
+
+function getAppliancesFilterResearchInput () {
+  const input = document.getElementById('filter_appliances');
+  let inputValue = '';
+  input.addEventListener('keyup', () => {
+    inputValue = input.value;
+    console.log(inputValue);
+    const items = document.querySelectorAll('.appliancesLi');
+    items.forEach(item => {
+      if (item.innerHTML.toLowerCase().includes(inputValue.toLowerCase())) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+}
+
+getAppliancesFilterResearchInput();
+
+/* Ustensils */
+
+function getUstensilsFilterResearchInput () {
+  const input = document.getElementById('filter_ustensils');
+  let inputValue = '';
+  input.addEventListener('keyup', () => {
+    inputValue = input.value;
+    console.log(inputValue);
+    const items = document.querySelectorAll('.ustensilsLi');
+    items.forEach(item => {
+      if (item.innerHTML.toLowerCase().includes(inputValue.toLowerCase())) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+}
+
+getUstensilsFilterResearchInput();
+
 function getResearchBarInput () {
   const input = document.getElementById('researchBarInput');
   let inputValue = '';
-  input.addEventListener('change', () => {
+  input.addEventListener('keyup', () => {
     inputValue = input.value;
     console.log(inputValue);
     return inputValue;
@@ -238,7 +305,7 @@ function renderTags () {
     const span = document.createElement('span');
     span.textContent = ing;
     const i = document.createElement('i');
-    i.className = 'fa-solid fa-xmark';
+    i.className = 'far fa-times-circle';
     i.addEventListener('click', () => {
       closeTag('ing', ing);
     });
@@ -253,7 +320,7 @@ function renderTags () {
     const span = document.createElement('span');
     span.textContent = app;
     const i = document.createElement('i');
-    i.className = 'fa-solid fa-xmark';
+    i.className = 'far fa-times-circle';
     i.addEventListener('click', () => {
       closeTag('app', app);
     });
@@ -268,7 +335,7 @@ function renderTags () {
     const span = document.createElement('span');
     span.textContent = ust;
     const i = document.createElement('i');
-    i.className = 'fa-solid fa-xmark';
+    i.className = 'far fa-times-circle';
     i.addEventListener('click', () => {
       closeTag('ust', ust);
     });

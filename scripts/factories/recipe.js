@@ -26,13 +26,17 @@ export default function recipeFactory (data) {
     recipeTimeDiv.appendChild(timeRecipe);
     recipeHeader.appendChild(recipeTimeDiv);
 
+    /* const recipeInfos = document.getElementById('recipeInfos'); */
+
     const recipeContent = document.createElement('div');
     recipeContent.className = 'recipeContent';
+    /* console.log(recipeInfos); */
 
     const recipeDescription = document.createElement('p');
     recipeDescription.textContent = description;
     recipeContent.appendChild(recipeDescription);
 
+    /* recipeInfos.appendChild(recipeContent); */
     article.appendChild(recipeHeader);
     article.appendChild(recipeContent);
 
@@ -58,12 +62,6 @@ export default function recipeFactory (data) {
   function getAppliancesCardDOM () {
     const applianceInfos = document.createElement('div');
     applianceInfos.className = 'applianceInfos';
-    /* applianceInfos.forEach((appliance) => {
-      const p = document.createElement('p');
-      p.innerText = appliance;
-      p.style.display = 'none';
-      applianceInfos.appendChild(p);
-    }); */
     const p = document.createElement('p');
     p.innerHTML = appliance;
     p.className = 'applianceName';
