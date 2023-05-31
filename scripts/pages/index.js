@@ -72,6 +72,7 @@ async function launchSearch () {
   const localStorageIngredient = JSON.parse(window.localStorage.getItem('ingredients'));
   const localStorageAppliance = JSON.parse(window.localStorage.getItem('appliances'));
   const localStorageUstensil = JSON.parse(window.localStorage.getItem('ustensils'));
+  const searchInput = document.getElementById('researchBarInput').value;
   const { recipes } = await getRecipes();
   const result = [];
 
@@ -88,7 +89,10 @@ async function launchSearch () {
 
     if (localStorageIngredient.every(i => ingredients.includes(i)) &&
         localStorageUstensil.every(u => ustensilsRecipe.includes(u)) &&
-        localStorageAppliance.every(a => applianceRecipe.includes(a))) {
+        localStorageAppliance.every(a => applianceRecipe.includes(a)) &&
+        (element.name.toLowerCase().includes(searchInput.toLowerCase()) ||
+        element.description.toLowerCase().includes(searchInput.toLowerCase()) ||
+        ingredients.map(i => i.toLowerCase()).includes(searchInput.toLowerCase()))) {
       result.push(element);
     }
   });
@@ -103,6 +107,17 @@ async function init () {
 init();
 
 /* Fonction pour les barres de recherches */
+
+/* Fonction de la grande barre de recherche */
+
+function getResearchBarInput () {
+  const input = document.getElementById('researchBarInput');
+  input.addEventListener('keyup', () => {
+    launchSearch();
+  });
+}
+
+getResearchBarInput();
 
 /* Ingrédients */
 
@@ -166,18 +181,6 @@ function getUstensilsFilterResearchInput () {
 }
 
 getUstensilsFilterResearchInput();
-
-function getResearchBarInput () {
-  const input = document.getElementById('researchBarInput');
-  let inputValue = '';
-  input.addEventListener('keyup', () => {
-    inputValue = input.value;
-    console.log(inputValue);
-    return inputValue;
-  });
-}
-
-getResearchBarInput();
 
 /* Event Listener pour les filtres et ouverture des listes */
 
