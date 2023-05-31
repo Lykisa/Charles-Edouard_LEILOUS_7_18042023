@@ -26,25 +26,25 @@ export default function recipeFactory (data) {
     recipeTimeDiv.appendChild(timeRecipe);
     recipeHeader.appendChild(recipeTimeDiv);
 
-    /* const recipeInfos = document.getElementById('recipeInfos'); */
+    const recipeInfos = document.createElement('div');
+    recipeInfos.className = 'recipeInfos';
 
     const recipeContent = document.createElement('div');
     recipeContent.className = 'recipeContent';
-    /* console.log(recipeInfos); */
+    console.log(recipeInfos);
 
     const recipeDescription = document.createElement('p');
     recipeDescription.textContent = description;
     recipeContent.appendChild(recipeDescription);
 
-    /* recipeInfos.appendChild(recipeContent); */
+    recipeInfos.appendChild(recipeContent);
     article.appendChild(recipeHeader);
-    article.appendChild(recipeContent);
+    article.appendChild(recipeInfos);
 
     return (article);
   }
 
   function getIngredientsCardDOM () {
-    /* const recipeContent = document.querySelector('.recipeContent'); */
     const ingredientInfos = document.createElement('div');
     ingredientInfos.className = 'ingredientInfos';
     ingredients.forEach((ingredient) => {
@@ -54,34 +54,9 @@ export default function recipeFactory (data) {
       const unit = (ingredient.unit !== undefined) ? ingredient.unit : '';
       p.innerHTML = `<span class = 'ingredientName'>${ingredient.ingredient}</span> ${quantity} ${unit}`;
       ingredientInfos.appendChild(p);
-      /* recipeContent.appendChild(ingredientInfos); */
     });
     return ingredientInfos;
   }
 
-  function getAppliancesCardDOM () {
-    const applianceInfos = document.createElement('div');
-    applianceInfos.className = 'applianceInfos';
-    const p = document.createElement('p');
-    p.innerHTML = appliance;
-    p.className = 'applianceName';
-    p.style.display = 'none';
-    applianceInfos.appendChild(p);
-    return applianceInfos;
-  }
-
-  function getUstensilsCardDOM () {
-    const ustensilsInfos = document.createElement('div');
-    ustensilsInfos.className = 'ustensilsInfos';
-    ustensils.forEach((ustensil) => {
-      const p = document.createElement('p');
-      p.className = 'ustensilName';
-      p.innerHTML = ustensil;
-      p.style.display = 'none';
-      ustensilsInfos.appendChild(p);
-    });
-    return ustensilsInfos;
-  }
-
-  return { name, getRecipeCardDOM, getIngredientsCardDOM, getAppliancesCardDOM, getUstensilsCardDOM };
+  return { name, getRecipeCardDOM, getIngredientsCardDOM };
 }
