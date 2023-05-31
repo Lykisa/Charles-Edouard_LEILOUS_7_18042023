@@ -104,6 +104,20 @@ init();
 
 /* Fonction pour les barres de recherches */
 
+/* Fonction de la grosse barre de recherche */
+
+function getResearchBarInput () {
+  const input = document.getElementById('researchBarInput');
+  let inputValue = '';
+  input.addEventListener('keyup', () => {
+    inputValue = input.value;
+    console.log(inputValue);
+    return inputValue;
+  });
+}
+
+getResearchBarInput();
+
 /* Ingrédients */
 
 function getIngredientsFilterResearchInput () {
@@ -166,18 +180,6 @@ function getUstensilsFilterResearchInput () {
 }
 
 getUstensilsFilterResearchInput();
-
-function getResearchBarInput () {
-  const input = document.getElementById('researchBarInput');
-  let inputValue = '';
-  input.addEventListener('keyup', () => {
-    inputValue = input.value;
-    console.log(inputValue);
-    return inputValue;
-  });
-}
-
-getResearchBarInput();
 
 /* Event Listener pour les filtres et ouverture des listes */
 
