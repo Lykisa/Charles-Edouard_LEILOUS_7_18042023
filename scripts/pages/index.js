@@ -72,26 +72,28 @@ async function launchSearch () {
   const localStorageIngredient = JSON.parse(window.localStorage.getItem('ingredients'));
   const localStorageAppliance = JSON.parse(window.localStorage.getItem('appliances'));
   const localStorageUstensil = JSON.parse(window.localStorage.getItem('ustensils'));
-  const { recipes } = await getRecipes();
+  const { recipes } = await getRecipes(); /* recopier le json */
   const result = [];
 
-  recipes.forEach((element) => {
-    const ingredientsRecipe = element.ingredients;
+  const searchInput = document.getElementById('researchBarInput').value.toLowerCase();
+  for (const recipe of recipes) {
     const ingredients = [];
-    ingredientsRecipe.forEach(ing => {
-      ingredients.push(ing.ingredient);
-    });
+    for (const ingredient of recipe.ingredients) {
+      ingredients.push(ingredient.ingredient);
+    }
+    const ustensilsRecipe = recipe.ustensils;
 
-    const ustensilsRecipe = element.ustensils;
-
-    const applianceRecipe = [element.appliance];
+    const applianceRecipe = [recipe.appliance];
 
     if (localStorageIngredient.every(i => ingredients.includes(i)) &&
-        localStorageUstensil.every(u => ustensilsRecipe.includes(u)) &&
-        localStorageAppliance.every(a => applianceRecipe.includes(a))) {
-      result.push(element);
+          localStorageUstensil.every(u => ustensilsRecipe.includes(u)) &&
+          localStorageAppliance.every(a => applianceRecipe.includes(a)) &&
+          (recipe.name.toLowerCase().includes(searchInput) ||
+          recipe.description.toLowerCase().includes(searchInput) ||
+          ingredients.map(i => i.toLowerCase()).includes(searchInput))) {
+      result.push(recipe);
     }
-  });
+  }
   displayData(result);
 }
 
