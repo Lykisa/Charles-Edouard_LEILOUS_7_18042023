@@ -23,9 +23,13 @@ async function displayData (recipes) {
     const recipeModel = recipeFactory(recipe);
     const recipeCardDOM = recipeModel.getRecipeCardDOM();
     const recipeIngredientsCardDOM = recipeModel.getIngredientsCardDOM();
+    const recipeAppliancesCardDOM = recipeModel.getAppliancesCardDOM();
+    const recipeUstensilsCardDOM = recipeModel.getUstensilsCardDOM();
     recipesSection.appendChild(recipeCardDOM);
     const recipeInfos = recipeCardDOM.querySelector('.recipeInfos');
     recipeInfos.appendChild(recipeIngredientsCardDOM);
+    recipeInfos.appendChild(recipeAppliancesCardDOM);
+    recipeInfos.appendChild(recipeUstensilsCardDOM);
   });
 
   const ingredientModel = ingredientFactory();

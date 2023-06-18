@@ -5,6 +5,9 @@ export default function recipeFactory (data) {
   function getRecipeCardDOM () {
     const article = document.createElement('article');
 
+    const img = document.createElement('img');
+    img.setAttribute('src', 'assets/img.png');
+
     const recipeHeader = document.createElement('div');
     recipeHeader.className = 'recipeHeader';
 
@@ -38,6 +41,7 @@ export default function recipeFactory (data) {
     recipeContent.appendChild(recipeDescription);
 
     recipeInfos.appendChild(recipeContent);
+    article.appendChild(img);
     article.appendChild(recipeHeader);
     article.appendChild(recipeInfos);
 
@@ -58,5 +62,29 @@ export default function recipeFactory (data) {
     return ingredientInfos;
   }
 
-  return { name, getRecipeCardDOM, getIngredientsCardDOM };
+  function getAppliancesCardDOM () {
+    const applianceInfos = document.createElement('div');
+    applianceInfos.className = 'applianceInfos';
+    const p = document.createElement('p');
+    p.innerHTML = appliance;
+    p.className = 'applianceName';
+    p.style.display = 'none';
+    applianceInfos.appendChild(p);
+    return applianceInfos;
+  }
+
+  function getUstensilsCardDOM () {
+    const ustensilsInfos = document.createElement('div');
+    ustensilsInfos.className = 'ustensilsInfos';
+    ustensils.forEach((ustensil) => {
+      const p = document.createElement('p');
+      p.className = 'ustensilName';
+      p.innerHTML = ustensil;
+      p.style.display = 'none';
+      ustensilsInfos.appendChild(p);
+    });
+    return ustensilsInfos;
+  }
+
+  return { name, getRecipeCardDOM, getIngredientsCardDOM, getAppliancesCardDOM, getUstensilsCardDOM };
 }
