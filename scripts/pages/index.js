@@ -26,9 +26,10 @@ async function displayData (recipes) {
     const recipeAppliancesCardDOM = recipeModel.getAppliancesCardDOM();
     const recipeUstensilsCardDOM = recipeModel.getUstensilsCardDOM();
     recipesSection.appendChild(recipeCardDOM);
-    recipeCardDOM.appendChild(recipeIngredientsCardDOM);
-    recipeCardDOM.appendChild(recipeAppliancesCardDOM);
-    recipeCardDOM.appendChild(recipeUstensilsCardDOM);
+    const recipeInfos = recipeCardDOM.querySelector('.recipeInfos');
+    recipeInfos.appendChild(recipeIngredientsCardDOM);
+    recipeInfos.appendChild(recipeAppliancesCardDOM);
+    recipeInfos.appendChild(recipeUstensilsCardDOM);
   });
 
   const ingredientModel = ingredientFactory();
@@ -114,6 +115,7 @@ function getResearchBarInput () {
   input.addEventListener('keyup', () => {
     inputValue = input.value;
     console.log(inputValue);
+    launchSearch();
     return inputValue;
   });
 }

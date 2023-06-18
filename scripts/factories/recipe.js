@@ -5,6 +5,9 @@ export default function recipeFactory (data) {
   function getRecipeCardDOM () {
     const article = document.createElement('article');
 
+    const img = document.createElement('img');
+    img.setAttribute('src', 'assets/img.png');
+
     const recipeHeader = document.createElement('div');
     recipeHeader.className = 'recipeHeader';
 
@@ -26,19 +29,20 @@ export default function recipeFactory (data) {
     recipeTimeDiv.appendChild(timeRecipe);
     recipeHeader.appendChild(recipeTimeDiv);
 
-    /* const recipeInfos = document.getElementById('recipeInfos'); */
+    const recipeInfos = document.createElement('div');
+    recipeInfos.className = 'recipeInfos';
 
     const recipeContent = document.createElement('div');
     recipeContent.className = 'recipeContent';
-    /* console.log(recipeInfos); */
 
     const recipeDescription = document.createElement('p');
     recipeDescription.textContent = description;
     recipeContent.appendChild(recipeDescription);
 
-    /* recipeInfos.appendChild(recipeContent); */
+    recipeInfos.appendChild(recipeContent);
+    article.appendChild(img);
     article.appendChild(recipeHeader);
-    article.appendChild(recipeContent);
+    article.appendChild(recipeInfos);
 
     return (article);
   }

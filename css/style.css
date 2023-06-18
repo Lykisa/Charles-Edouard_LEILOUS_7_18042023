@@ -253,21 +253,63 @@ main {
     margin-top: 50px;
 }
 
+#recipesSection article {
+    width: 500px;
+    height: auto;
+    background-color: lightgray;
+    border-radius: 5px;
+}
+
+#recipesSection article img {
+    width: 500px;
+    height: 180px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
 .recipeHeader {
     display: flex;
     justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .recipeTimeDiv {
     display: flex;
     justify-content: space-between;
+    padding-top: 5px;
+}
+
+.recipeInfos {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .recipeContent {
-    display: flex;
+    width: 250px;
+    height: 175px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.recipeContent p {
+    margin-top: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.ingredientInfos p {
+    margin-top: 0;
+}
+
+.ingredientName {
+    font-weight: bold;
 }
 
 .fa-clock {
-    padding-top: 15px;
+    padding-top: 18px;
     margin-right: 5px;
 }
