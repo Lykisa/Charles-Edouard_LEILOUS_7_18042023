@@ -65,6 +65,7 @@ export default function recipeFactory (data) {
   function getAppliancesCardDOM () {
     const applianceInfos = document.createElement('div');
     applianceInfos.className = 'applianceInfos';
+    applianceInfos.style.display = 'none';
     const p = document.createElement('p');
     p.innerHTML = appliance;
     p.className = 'applianceName';
@@ -76,6 +77,7 @@ export default function recipeFactory (data) {
   function getUstensilsCardDOM () {
     const ustensilsInfos = document.createElement('div');
     ustensilsInfos.className = 'ustensilsInfos';
+    ustensilsInfos.style.display = 'none';
     ustensils.forEach((ustensil) => {
       const p = document.createElement('p');
       p.className = 'ustensilName';
