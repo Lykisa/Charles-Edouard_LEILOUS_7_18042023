@@ -34,7 +34,6 @@ export default function recipeFactory (data) {
 
     const recipeContent = document.createElement('div');
     recipeContent.className = 'recipeContent';
-    console.log(recipeInfos);
 
     const recipeDescription = document.createElement('p');
     recipeDescription.textContent = description;
