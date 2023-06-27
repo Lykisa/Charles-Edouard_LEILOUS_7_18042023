@@ -73,7 +73,7 @@ async function launchSearch () {
   const localStorageIngredient = JSON.parse(window.localStorage.getItem('ingredients'));
   const localStorageAppliance = JSON.parse(window.localStorage.getItem('appliances'));
   const localStorageUstensil = JSON.parse(window.localStorage.getItem('ustensils'));
-  const { recipes } = await getRecipes(); /* recopier le json */
+  const { recipes } = await getRecipes();
   const result = [];
 
   const searchInput = document.getElementById('researchBarInput').value.toLowerCase();

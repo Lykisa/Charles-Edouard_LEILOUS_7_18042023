@@ -48,17 +48,14 @@ export default function recipeFactory (data) {
   }
 
   function getIngredientsCardDOM () {
-    /* const recipeContent = document.querySelector('.recipeContent'); */
     const ingredientInfos = document.createElement('div');
     ingredientInfos.className = 'ingredientInfos';
     ingredients.forEach((ingredient) => {
       const p = document.createElement('p');
-      /*  if ternaire >> a regarder en detail */
       const quantity = (ingredient.quantity !== undefined) ? ingredient.quantity : '';
       const unit = (ingredient.unit !== undefined) ? ingredient.unit : '';
       p.innerHTML = `<span class = 'ingredientName'>${ingredient.ingredient}</span> ${quantity} ${unit}`;
       ingredientInfos.appendChild(p);
-      /* recipeContent.appendChild(ingredientInfos); */
     });
     return ingredientInfos;
   }
